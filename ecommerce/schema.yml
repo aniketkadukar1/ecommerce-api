@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Ecommerce
+  version: 1.0.1
+paths:
+  /api/category/:
+    get:
+      operationId: api_category_retrieve
+      description: Simple Viewset for viewing categories
+      tags:
+        - api
+      security:
+        - cookieAuth: []
+        - basicAuth: []
+        - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
