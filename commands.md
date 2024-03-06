@@ -10,3 +10,7 @@ print(get_random_secret_key())
 
 
 pip freeze > requirements.txt
+
+python manage.py spectacular --file schema.yml
+
+pytest or pytest-coverage
