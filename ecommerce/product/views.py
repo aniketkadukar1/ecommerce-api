@@ -4,6 +4,7 @@ from . serializers import CategorySerializer, BrandSerializer, ProductSerializer
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
+from django.db.models import Prefetch
 
 
 
@@ -42,7 +43,7 @@ class ProductViewSet(viewsets.ViewSet):
     lookup_field = "slug"
 
     def retrieve(self, request, slug=None):
-        serializer = ProductSerializer(self.queryset.filter(slug=slug).select_related("category", "brand"), many=True)
+        serializer = ProductSerializer(self.queryset.filter(slug=slug).select_related("category", "brand").prefetch_related(Prefetch("product_line")).prefetch_related(Prefetch("product_line__product_image")), many=True)
         return Response(serializer.data)
          
     
